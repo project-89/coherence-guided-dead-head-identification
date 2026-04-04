@@ -1,0 +1,158 @@
+[
+  {
+    "model_name": "gpt2",
+    "base_result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/full_gpt2_head144_small_redundancy_v2_dimaware.json",
+    "seeds": [
+      7,
+      11,
+      19
+    ],
+    "runs": [
+      {
+        "seed": 7,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/gpt2_seed7.json",
+        "baseline_eval_loss": 2.7388461232185364,
+        "dead_only_eval_loss": 5.57906186580658,
+        "dead_only_delta_loss": 2.840215742588043,
+        "dead_precision": 0.9523809523809523,
+        "dead_count": 42,
+        "protected_count": 26,
+        "alive_count": 76
+      },
+      {
+        "seed": 11,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/gpt2_seed11.json",
+        "baseline_eval_loss": 2.703277289867401,
+        "dead_only_eval_loss": 5.3218852281570435,
+        "dead_only_delta_loss": 2.6186079382896423,
+        "dead_precision": 0.9574468085106383,
+        "dead_count": 47,
+        "protected_count": 26,
+        "alive_count": 71
+      },
+      {
+        "seed": 19,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/gpt2_seed19.json",
+        "baseline_eval_loss": 2.8131893277168274,
+        "dead_only_eval_loss": 5.737536907196045,
+        "dead_only_delta_loss": 2.9243475794792175,
+        "dead_precision": 0.9565217391304348,
+        "dead_count": 46,
+        "protected_count": 26,
+        "alive_count": 72
+      }
+    ],
+    "dead_precision_mean": 0.9554498333406751,
+    "dead_precision_std": 0.0026976769818233513,
+    "dead_count_mean": 45.0,
+    "dead_count_std": 2.6457513110645907,
+    "protected_count_mean": 26.0,
+    "protected_count_std": 0.0,
+    "dead_only_delta_loss_mean": 2.7943904201189675,
+    "dead_only_delta_loss_std": 0.15793717796398862
+  },
+  {
+    "model_name": "Qwen/Qwen2.5-0.5B",
+    "base_result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/qwen25_05b_head336_small_theory_redundancy_v2_boundary2.json",
+    "seeds": [
+      7,
+      11,
+      19
+    ],
+    "runs": [
+      {
+        "seed": 7,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/qwen25_05b_seed7.json",
+        "baseline_eval_loss": 2.24700528383255,
+        "dead_only_eval_loss": 3.3749393224716187,
+        "dead_only_delta_loss": 1.1279340386390686,
+        "dead_precision": 0.9615384615384616,
+        "dead_count": 156,
+        "protected_count": 45,
+        "alive_count": 135
+      },
+      {
+        "seed": 11,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/qwen25_05b_seed11.json",
+        "baseline_eval_loss": 2.130043387413025,
+        "dead_only_eval_loss": 4.207294225692749,
+        "dead_only_delta_loss": 2.077250838279724,
+        "dead_precision": 0.9811320754716981,
+        "dead_count": 159,
+        "protected_count": 44,
+        "alive_count": 133
+      },
+      {
+        "seed": 19,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/qwen25_05b_seed19.json",
+        "baseline_eval_loss": 2.2255839407444,
+        "dead_only_eval_loss": 3.9785025119781494,
+        "dead_only_delta_loss": 1.7529185712337494,
+        "dead_precision": 0.9294871794871795,
+        "dead_count": 156,
+        "protected_count": 45,
+        "alive_count": 135
+      }
+    ],
+    "dead_precision_mean": 0.9573859054991131,
+    "dead_precision_std": 0.02607166299946905,
+    "dead_count_mean": 157.0,
+    "dead_count_std": 1.7320508075688772,
+    "protected_count_mean": 44.666666666666664,
+    "protected_count_std": 0.5773502691896257,
+    "dead_only_delta_loss_mean": 1.6527011493841808,
+    "dead_only_delta_loss_std": 0.48252797354311483
+  },
+  {
+    "model_name": "HuggingFaceTB/SmolLM2-360M",
+    "base_result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/smollm2_360m_head480_small_theory_redundancy_v1.json",
+    "seeds": [
+      7,
+      11,
+      19
+    ],
+    "runs": [
+      {
+        "seed": 7,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/smollm2_360m_seed7.json",
+        "baseline_eval_loss": 2.1150383055210114,
+        "dead_only_eval_loss": 2.9692347049713135,
+        "dead_only_delta_loss": 0.8541963994503021,
+        "dead_precision": 0.9924242424242424,
+        "dead_count": 264,
+        "protected_count": 31,
+        "alive_count": 185
+      },
+      {
+        "seed": 11,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/smollm2_360m_seed11.json",
+        "baseline_eval_loss": 2.012735426425934,
+        "dead_only_eval_loss": 3.066988706588745,
+        "dead_only_delta_loss": 1.0542532801628113,
+        "dead_precision": 0.9923076923076923,
+        "dead_count": 260,
+        "protected_count": 31,
+        "alive_count": 189
+      },
+      {
+        "seed": 19,
+        "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/repeatability/smollm2_360m_seed19.json",
+        "baseline_eval_loss": 2.20669025182724,
+        "dead_only_eval_loss": 3.143699288368225,
+        "dead_only_delta_loss": 0.9370090365409851,
+        "dead_precision": 0.992,
+        "dead_count": 250,
+        "protected_count": 33,
+        "alive_count": 197
+      }
+    ],
+    "dead_precision_mean": 0.9922439782439783,
+    "dead_precision_std": 0.00021918033686441123,
+    "dead_count_mean": 258.0,
+    "dead_count_std": 7.211102550927978,
+    "protected_count_mean": 31.666666666666668,
+    "protected_count_std": 1.1547005383792515,
+    "dead_only_delta_loss_mean": 0.9484862387180328,
+    "dead_only_delta_loss_std": 0.10052106001960187
+  }
+]

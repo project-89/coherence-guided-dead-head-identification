@@ -1,0 +1,1246 @@
+{
+  "model_name": "HuggingFaceTB/SmolLM2-360M",
+  "device": "mps",
+  "result_json": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/out/exp98_pruning/smollm2_360m_head480_small_theory_redundancy_v1.json",
+  "eval_path": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/data/tinystories_corpus/val.txt",
+  "eval_sequences": 8,
+  "batch_size": 1,
+  "passes": 50,
+  "warmup_passes": 5,
+  "seq_lengths": [
+    128,
+    256,
+    512,
+    1024
+  ],
+  "total_query_heads": 480,
+  "dead_query_heads": 261,
+  "total_kv_groups": 160,
+  "fully_dead_kv_groups": 44,
+  "fully_dead_kv_fraction": 0.275,
+  "removed_query_heads": 132,
+  "removed_query_fraction": 0.275,
+  "variants": [
+    {
+      "name": "baseline",
+      "parameter_count": 361821120,
+      "parameter_bytes": 1447284480,
+      "total_query_heads": 480,
+      "total_kv_heads": 160,
+      "kv_cache_bytes_per_token": 81920
+    },
+    {
+      "name": "level2_full_dead_kv_groups",
+      "parameter_count": 340194240,
+      "parameter_bytes": 1360776960,
+      "total_query_heads": 348,
+      "total_kv_heads": 116,
+      "kv_cache_bytes_per_token": 59392
+    }
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 1,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 2,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        1
+      ],
+      "kept_groups": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        3,
+        4,
+        5
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 3,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 4,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        3,
+        4
+      ],
+      "kept_groups": [
+        0,
+        1,
+        2
+      ],
+      "removed_query_heads": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "layer": 5,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 6,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        4
+      ],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "removed_query_heads": [
+        12,
+        13,
+        14
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "layer": 7,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        2,
+        3
+      ],
+      "kept_groups": [
+        0,
+        1,
+        4
+      ],
+      "removed_query_heads": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 8,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        1
+      ],
+      "kept_groups": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        3,
+        4,
+        5
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 9,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "kept_groups": [
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 10,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 11,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1
+      ],
+      "kept_groups": [
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "kept_query_heads": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 12,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        3
+      ],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "removed_query_heads": [
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 13,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        2,
+        3
+      ],
+      "kept_groups": [
+        1,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        3,
+        4,
+        5,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 14,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        2
+      ],
+      "kept_groups": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        6,
+        7,
+        8
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 15,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        4
+      ],
+      "kept_groups": [
+        1,
+        2,
+        3
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        12,
+        13,
+        14
+      ],
+      "kept_query_heads": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "layer": 16,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1,
+        3
+      ],
+      "kept_groups": [
+        2,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        6,
+        7,
+        8,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 17,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "kept_groups": [
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 18,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        3,
+        4
+      ],
+      "kept_groups": [
+        0,
+        1,
+        2
+      ],
+      "removed_query_heads": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "layer": 19,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1
+      ],
+      "kept_groups": [
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "kept_query_heads": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 20,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "kept_groups": [
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 21,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        2,
+        3
+      ],
+      "kept_groups": [
+        0,
+        1,
+        4
+      ],
+      "removed_query_heads": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 22,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 23,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        4
+      ],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "removed_query_heads": [
+        12,
+        13,
+        14
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "layer": 24,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0,
+        1,
+        3
+      ],
+      "kept_groups": [
+        2,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "kept_query_heads": [
+        6,
+        7,
+        8,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 25,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 26,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        0
+      ],
+      "kept_groups": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        0,
+        1,
+        2
+      ],
+      "kept_query_heads": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 27,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 28,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        2
+      ],
+      "kept_groups": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        6,
+        7,
+        8
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 29,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [
+        1
+      ],
+      "kept_groups": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [
+        3,
+        4,
+        5
+      ],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 30,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "layer": 31,
+      "total_query_heads": 15,
+      "total_kv_heads": 5,
+      "group_size": 3,
+      "fully_dead_groups": [],
+      "kept_groups": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_query_heads": [],
+      "kept_query_heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    }
+  ],
+  "lengths": [
+    {
+      "seq_len": 128,
+      "baseline_loss": 2.210352659225464,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 128,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 238.31493583973497,
+          "tokens_per_second": 537.1043973764156,
+          "loss": 2.210352659225464,
+          "delta_loss": 0.0,
+          "cache_bytes": 10485760,
+          "cache_reduction_vs_baseline": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "level2_full_dead_kv_groups",
+          "seq_len": 128,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 228.98608500137925,
+          "tokens_per_second": 558.9859313906738,
+          "loss": 2.5876069962978363,
+          "delta_loss": 0.37725433707237244,
+          "cache_bytes": 7602176,
+          "cache_reduction_vs_baseline": 0.275,
+          "speedup_vs_baseline": 0.0407398154272105
+        }
+      ]
+    },
+    {
+      "seq_len": 256,
+      "baseline_loss": 2.0789402574300766,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 256,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 255.6482974998653,
+          "tokens_per_second": 1001.3757279182933,
+          "loss": 2.0789402574300766,
+          "delta_loss": 0.0,
+          "cache_bytes": 20971520,
+          "cache_reduction_vs_baseline": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "level2_full_dead_kv_groups",
+          "seq_len": 256,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 299.911724999547,
+          "tokens_per_second": 853.5845005739161,
+          "loss": 2.522516280412674,
+          "delta_loss": 0.44357602298259735,
+          "cache_bytes": 15204352,
+          "cache_reduction_vs_baseline": 0.275,
+          "speedup_vs_baseline": -0.14758818615627167
+        }
+      ]
+    },
+    {
+      "seq_len": 512,
+      "baseline_loss": 1.7882890403270721,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 512,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 336.27674583811313,
+          "tokens_per_second": 1522.5554735398853,
+          "loss": 1.7882890403270721,
+          "delta_loss": 0.0,
+          "cache_bytes": 41943040,
+          "cache_reduction_vs_baseline": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "level2_full_dead_kv_groups",
+          "seq_len": 512,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 293.70030167978257,
+          "tokens_per_second": 1743.2736605024895,
+          "loss": 2.289011150598526,
+          "delta_loss": 0.5007221102714539,
+          "cache_bytes": 30408704,
+          "cache_reduction_vs_baseline": 0.275,
+          "speedup_vs_baseline": 0.14496561261537644
+        }
+      ]
+    },
+    {
+      "seq_len": 1024,
+      "baseline_loss": 1.7978333085775375,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 1024,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 714.1740099992603,
+          "tokens_per_second": 1433.8242300375234,
+          "loss": 1.7978333085775375,
+          "delta_loss": 0.0,
+          "cache_bytes": 83886080,
+          "cache_reduction_vs_baseline": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "level2_full_dead_kv_groups",
+          "seq_len": 1024,
+          "passes": 50,
+          "warmup_passes": 5,
+          "avg_ms": 545.3566966811195,
+          "tokens_per_second": 1877.6701674917772,
+          "loss": 2.3298947513103485,
+          "delta_loss": 0.532061442732811,
+          "cache_bytes": 60817408,
+          "cache_reduction_vs_baseline": 0.275,
+          "speedup_vs_baseline": 0.30955393845076684
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Level 2 removes only full dead KV groups from the CLR dead-head map.",
+    "Timing uses cache-building prefill forwards (use_cache=True), not masked proxy timing.",
+    "KV cache bytes are measured from the actual returned cache tensors."
+  ]
+}

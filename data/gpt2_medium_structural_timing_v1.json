@@ -1,0 +1,195 @@
+{
+  "model_name": "gpt2-medium",
+  "device": "mps",
+  "eval_path": "/Users/parzival/workspace/oneirocom/project89/wayfaring/06_intelligence/coherence_lattice/data/tinystories_corpus/val.txt",
+  "eval_sequences": 16,
+  "batch_size": 1,
+  "passes": 100,
+  "warmup_passes": 10,
+  "seq_lengths": [
+    128,
+    256,
+    512,
+    1024
+  ],
+  "dead_heads": 114,
+  "dead_plus_redundant_heads": 199,
+  "variants": [
+    {
+      "name": "baseline",
+      "pruned_heads": 0,
+      "parameter_count": 354823168,
+      "parameter_bytes": 1419292672
+    },
+    {
+      "name": "dead_only",
+      "pruned_heads": 114,
+      "parameter_count": 324916864,
+      "parameter_bytes": 1299667456
+    },
+    {
+      "name": "dead_plus_redundant",
+      "pruned_heads": 199,
+      "parameter_count": 302618304,
+      "parameter_bytes": 1210473216
+    }
+  ],
+  "lengths": [
+    {
+      "seq_len": 128,
+      "baseline_loss": 2.468491345643997,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 128,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 71.72964584082365,
+          "tokens_per_second": 1784.4783492176548,
+          "loss": 2.468491345643997,
+          "delta_loss": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "dead_only",
+          "seq_len": 128,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 133.04181791841984,
+          "tokens_per_second": 962.1035100293695,
+          "loss": 4.6710198521614075,
+          "delta_loss": 2.2025285065174103,
+          "speedup_vs_baseline": -0.46084887471390623
+        },
+        {
+          "name": "dead_plus_redundant",
+          "seq_len": 128,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 144.04674666933715,
+          "tokens_per_second": 888.6004228462524,
+          "loss": 3.9209121614694595,
+          "delta_loss": 1.4524208158254623,
+          "speedup_vs_baseline": -0.5020391123065013
+        }
+      ]
+    },
+    {
+      "seq_len": 256,
+      "baseline_loss": 2.4192565456032753,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 256,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 96.05072041042149,
+          "tokens_per_second": 2665.258510359117,
+          "loss": 2.4192565456032753,
+          "delta_loss": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "dead_only",
+          "seq_len": 256,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 166.7333733383566,
+          "tokens_per_second": 1535.3854772703014,
+          "loss": 4.777946054935455,
+          "delta_loss": 2.35868950933218,
+          "speedup_vs_baseline": -0.42392624531440914
+        },
+        {
+          "name": "dead_plus_redundant",
+          "seq_len": 256,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 155.87319375015795,
+          "tokens_per_second": 1642.3606512504693,
+          "loss": 4.087288171052933,
+          "delta_loss": 1.6680316254496574,
+          "speedup_vs_baseline": -0.3837893604439977
+        }
+      ]
+    },
+    {
+      "seq_len": 512,
+      "baseline_loss": 2.066512145102024,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 512,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 181.75650333054364,
+          "tokens_per_second": 2816.9556005865343,
+          "loss": 2.066512145102024,
+          "delta_loss": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "dead_only",
+          "seq_len": 512,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 211.90471207955852,
+          "tokens_per_second": 2416.1803433978016,
+          "loss": 4.686504423618317,
+          "delta_loss": 2.6199922785162926,
+          "speedup_vs_baseline": -0.14227247923442066
+        },
+        {
+          "name": "dead_plus_redundant",
+          "seq_len": 512,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 201.15673291962594,
+          "tokens_per_second": 2545.2789601856102,
+          "loss": 3.886761352419853,
+          "delta_loss": 1.8202492073178291,
+          "speedup_vs_baseline": -0.09644335194504206
+        }
+      ]
+    },
+    {
+      "seq_len": 1024,
+      "baseline_loss": 2.109780304133892,
+      "variants": [
+        {
+          "name": "baseline",
+          "seq_len": 1024,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 481.2946341582574,
+          "tokens_per_second": 2127.594881232963,
+          "loss": 2.109780304133892,
+          "delta_loss": 0.0,
+          "speedup_vs_baseline": 0.0
+        },
+        {
+          "name": "dead_only",
+          "seq_len": 1024,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 437.4227304221131,
+          "tokens_per_second": 2340.9848843745262,
+          "loss": 5.034857481718063,
+          "delta_loss": 2.9250771775841713,
+          "speedup_vs_baseline": 0.10029635106938284
+        },
+        {
+          "name": "dead_plus_redundant",
+          "seq_len": 1024,
+          "passes": 100,
+          "warmup_passes": 10,
+          "avg_ms": 364.2396062496118,
+          "tokens_per_second": 2811.3362260178187,
+          "loss": 4.30917102098465,
+          "delta_loss": 2.1993907168507576,
+          "speedup_vs_baseline": 0.32136820351279494
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "model": "Qwen/Qwen3-8B",
+  "device": "mps",
+  "baseline_loss": 3.1365,
+  "baseline_ppl": 23.02,
+  "old_stored": {
+    "avg_bits": 4.25,
+    "effective_bits": 3.69,
+    "n_quantized": 252,
+    "n_gptq": 216,
+    "n_simple_absmax": 36,
+    "orig_gb": 13.89,
+    "quant_gb": 3.78,
+    "compression": 3.7,
+    "savings_pct": 72.8,
+    "block_size": 128,
+    "hessian_damp": 0.01,
+    "time": 1805.6,
+    "loss": 3.298,
+    "delta": 0.3393
+  },
+  "new_role_aware_4b": {
+    "min_bits": 4,
+    "policy": "attn=4, ffn_read=4, ffn_write=6",
+    "loss": 3.174,
+    "delta": 0.0375,
+    "ppl": 23.9,
+    "effective_bits": 4.24,
+    "compression": 3.2,
+    "savings_pct": 68.7,
+    "time": 511.2
+  },
+  "new_role_aware_safe": {
+    "min_bits": 5,
+    "policy": "attn=5, ffn_read=5, ffn_write=7",
+    "loss": 3.1404,
+    "delta": 0.0039,
+    "ppl": 23.11,
+    "effective_bits": 4.97,
+    "compression": 2.7,
+    "savings_pct": 63.3,
+    "time": 470.6
+  }
+}
