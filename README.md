@@ -1,33 +1,3 @@
----
-# PROJECT 89 DOCUMENT METADATA
-doc_id: coherence-guided-transformer-pruning-readme-001
-version: 1.0.4
-last_updated: 2026-04-02
-status: draft
-author: Codex
-contributors: [parzival]
-
-# DOCUMENT RELATIONSHIPS
-parent_docs:
-  - doc_id: coherence-guided-transformer-pruning-001
-    relationship: packages
-child_docs: []
-related_docs:
-  - doc_id: coherence-guided-transformer-pruning-plan-001
-    relationship: operationalizes
-  - doc_id: repository-guidelines-001
-    relationship: informed_by
-
-# CONTENT CLASSIFICATION
-domain: publication
-sub_domain: transformer_pruning
-keywords: [publication, latex, pruning, coherence, reproducibility]
-
-# SYNCHRONIZATION
-last_sync: 2026-04-02
-sync_notes: Clarified that the package proves a dead-head identification law, not a downstream pruning operator, while retaining the exact artifact-threshold workflow.
----
-
 # Coherence-Guided Dead-Head Identification
 
 This repository is the self-contained publication package for the five-model
