@@ -1,92 +1,107 @@
----
-# PROJECT 89 DOCUMENT METADATA
-doc_id: coherence-guided-transformer-pruning-agents-001
-version: 1.0.0
-last_updated: 2026-03-21
-status: draft
-author: Codex
-contributors: [parzival]
+# Agent Briefing: Coherence-Guided Dead-Head Identification
 
-# DOCUMENT RELATIONSHIPS
-parent_docs:
-  - doc_id: coherence-guided-transformer-pruning-readme-001
-    relationship: supplements
-child_docs: []
-related_docs:
-  - doc_id: coherence-guided-transformer-pruning-001
-    relationship: governs
-  - doc_id: coherence-guided-transformer-pruning-plan-001
-    relationship: tracks
+## What This Is
 
-# CONTENT CLASSIFICATION
-domain: publication
-sub_domain: agent_guidance
-keywords: [agents, publication, pruning, coherence, latex]
+A physics-derived dead-head detector for frozen transformers. Each attention
+head writes a signal `s_h(i) = sum_j A_ij * V_h(x_j)` into the residual
+stream. Measure the mean cosine alignment between that write-back and the
+pre-head residual state `x_i`. If the mean coupling falls below a derived
+threshold, the head is dead.
 
-# SYNCHRONIZATION
-last_sync: 2026-03-21
-sync_notes: Added package-local agent briefing for the formal pruning publication bundle.
----
+The threshold:
 
-# Agent Guide
+```
+tau_death(d) = chi_c / sqrt(d_model),    chi_c = 0.96
+```
 
-This folder is a publication package, not a sandbox.
+is derived from lattice coupled-oscillator criticality (CLR bond death at
+cos = 0.679, normalized by the S^1 fluctuation scale, transferred to S^(d-1)
+by concentration of measure). No parameter is fitted. No model-specific
+calibration is needed.
 
-## First Files to Read
+## Why It Matters
 
-1. `README.md`
-2. `paper.tex`
-3. `paper.md`
+Every existing pruning method requires fitting a threshold per model. This
+one does not. The same formula, with the same constant, achieves 95--100%
+precision across GPT-2, GPT-2 Medium, Qwen2.5 0.5B, SmolLM2 360M,
+OpenLLaMA 7B, and Gemma 3 4B (d = 768 through 4096, four architecture
+families). That makes it an identification law rather than a heuristic.
 
-If you need to validate figures or tables, then inspect `data/`, `figures/`, and
-`scripts/`.
+## How to Implement the Dead-Head Scan
 
-## What This Package Claims
+```python
+import torch
 
-The paper's validated result surface is narrow and should stay narrow:
+def dead_head_scan(model, calibration_tokens, chi_c=0.96):
+    """
+    Returns list of (layer, head, mean_coupling, is_dead) tuples.
 
-- the head-level observable is incoming write-back alignment with the pre-head
-  residual stream
-- the death threshold is `tau_death(d) = 0.96 / sqrt(d)`
-- the threshold transfers across five completed model pilots
-- structural speedups are claimed only where structural compaction was actually
-  implemented and measured
+    Steps:
+    1. Run forward pass, hooking each attention layer.
+    2. For each head h at each receiver position i:
+       - extract pre-head residual x_i (before the attention block)
+       - extract write-back s_h(i) = sum_j A_ij * V_h(x_j)
+       - compute c_h(i) = cos(s_h(i), x_i)
+    3. Average c_h(i) over positions and calibration sequences
+       to get one scalar mean_coupling per head.
+    4. Compare to tau_death = chi_c / sqrt(d_model).
+    5. Apply protections:
+       - Boundary: first 1-2 layers are input transducers; protect them.
+       - Bridge veto: heads with unusually high bridge mass in the
+         layerwise attention graph are protected.
+    """
+    d_model = model.config.hidden_size
+    tau = chi_c / (d_model ** 0.5)
+    # Full implementation: scripts/coherence_anatomy_scan.py
+    # Publication harness: scripts/98_coherence_pruning_harness.py
+```
 
-Do not silently widen the claim to:
+## Derivation (for reference)
 
-- a full generalized BKT theorem on `S^(d-1)`
-- theorem closure that transformers are exactly vector Kuramoto systems
-- CLR-during-training as an already-validated result
+1. CLR bond death threshold on S^1: `cos(Delta theta)_death = 0.679`
+2. Normalize by S^1 fluctuation scale `sigma_1 = 1/sqrt(2)`:
+   `chi_c = 0.679 / (1/sqrt(2)) = 0.96025`
+3. Transfer to S^(d-1) via concentration of measure (`sigma_d = 1/sqrt(d)`):
+   `tau_death(d) = chi_c * sigma_d = 0.96 / sqrt(d)`
 
-Those are legitimate follow-on programs, but not this paper.
+## What to Claim / What Not to Claim
 
-## Local Source of Truth
+**DO claim:**
+- The threshold identifies dead heads at 95--100% precision across six
+  models with zero fitted parameters
+- The threshold is derived from coupled-oscillator criticality
+- Dead heads are individually safe to ablate (validated by per-head ablation)
+- The identification law transfers across architecture families
 
-- `paper.tex` is the formal manuscript source
-- `references.bib` is the bibliography source
-- `data/` contains the frozen JSON artifacts used to reproduce figures and tables
-- `figures/` contains the publication figures
-- `scripts/` contains the exact scripts used for artifact regeneration and model-side
-  reruns
-- `supporting/` contains two small supplementary artifacts referenced by the paper
+**DO NOT claim:**
+- That simultaneously removing all dead heads is lossless (it is catastrophic)
+- Theorem closure that transformers are exactly vector Kuramoto systems
+- The full generalized BKT critical theory on S^(d-1)
+- CLR-during-training as already validated
+- That naive deletion is the correct downstream operator
 
-## Editing Rules for This Folder
+The identification law is this paper. Removal is a separate engineering
+problem addressed in follow-on work.
 
-- keep paths local to this publication package whenever possible
-- prefer reading bundled JSONs in `data/` over reaching back into `out/`
-- if you change a figure script, regenerate the figure in `figures/`
-- if you change the manuscript, recompile `paper.pdf`
-- if you change the result surface, update `README.md` and `INDEX.md` as well
+## File Map
 
-## Theory Hygiene
+| File | Purpose |
+|---|---|
+| `paper.tex` | Formal manuscript (source of truth) |
+| `paper.pdf` | Compiled manuscript |
+| `references.bib` | Bibliography |
+| `data/` | Frozen JSON artifacts for six models |
+| `figures/` | Publication figures |
+| `scripts/coherence_anatomy_scan.py` | **Standalone scanner** — scan any HF model |
+| `scripts/98_coherence_pruning_harness.py` | Full experiment harness |
+| `scripts/98_result_plots.py` | Regenerate summary figure |
+| `scripts/98_threshold_evidence_plots.py` | Head-level threshold evidence |
+| `scripts/98_verify_threshold_bundle.py` | Verify transfer rows |
 
-The physical derivation that belongs here is:
+## Editing Rules
 
-1. CLR bond death threshold `0.679` on `S^1`
-2. normalize by the natural `S^1` fluctuation scale `1 / sqrt(2)` to get `0.96`
-3. rescale by concentration of measure on `S^(d-1)` to get `0.96 / sqrt(d)`
-
-That is the core derivation for this paper.
-
-If you want to develop the generalized BKT critical-point program, put it in
-`papers/current/lattice_theory/`, not here.
+- `paper.tex` is the source of truth. If you change the manuscript,
+  recompile `paper.pdf`.
+- Prefer bundled JSONs in `data/` over reaching into `out/`.
+- If you change a figure script, regenerate the figure in `figures/`.
+- Generalized BKT work goes in `papers/current/lattice_theory/`, not here.

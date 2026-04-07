@@ -1,4 +1,4 @@
-PYTHON ?= python3
+PYTHON ?= ../../../.venv/bin/python
 TEX = pdflatex
 BIB = bibtex
 SRC = paper
