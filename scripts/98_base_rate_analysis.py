@@ -8,12 +8,13 @@ beyond what random selection would achieve?
 The answer is nuanced:
   - Precision lift over random is modest (~1.0x) because individual ablation
     is a weak test on well-trained models.
-  - The real value is threefold:
+  - The threshold is a criticality boundary for coherent transport, not a
+    classifier optimized for ablation precision.
+  - The real value is:
     1. Zero ablations required (random baseline needs N ablation runs first).
-    2. Clean bimodal separation: dead heads cluster 4-8 sigma below alive heads
-       in normalized coupling space.
-    3. Derived from physics, not fitted — the same constant works across all
+    2. Derived from physics, not fitted — the same constant works across all
        architectures without model-specific calibration.
+    3. Consistent geometric partition in normalized coupling space.
 """
 
 import json
@@ -125,8 +126,8 @@ def print_report(results):
               f'{r["separation"]:>10.3f} {r["cohens_d"]:>8.2f}')
     print()
     print("  Normalized coupling = mean_cosine * sqrt(d). Threshold at chi_c = 0.96.")
-    print("  Separation 4-8 in normalized units = clean bimodal split.")
-    print(f"  Cohen's d > 1.5 on all models = very large effect size.")
+    print("  Separation 4-8 in normalized units = consistent geometric partition.")
+    print("  Note: this separation does not imply bimodality in the marginal density.")
     print()
 
     # Table 3: Safety
