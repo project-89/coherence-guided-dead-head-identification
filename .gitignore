@@ -3,6 +3,7 @@ __pycache__/
 *.pyo
 .DS_Store
 
+# LaTeX build artifacts
 *.aux
 *.bbl
 *.blg
@@ -13,3 +14,6 @@ __pycache__/
 *.synctex.gz
 *.toc
 paperNotes.bib
+
+# Internal working files (live in monorepo source, not here)
+.gpd/

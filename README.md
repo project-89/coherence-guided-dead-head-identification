@@ -3,18 +3,61 @@
 **A zero-parameter dead-head threshold derived from coupled-oscillator
 criticality, validated across six model families at 95--100% precision.**
 
-## The Result
+## The Key Insight: Transformers Are Coupled Oscillator Networks
 
-Attention heads in a frozen transformer whose mean coupling to the residual
-stream falls below
+Every pruning method in the literature fits its threshold from data.
+Magnitude pruning, movement pruning, SparseGPT, Wanda, FLAP --- all
+require model-specific calibration to decide what to cut.
+
+This paper takes a different approach. It starts from a geometric
+observation: **LayerNorm projects token states onto a sphere.** After
+normalization, each token's hidden state lives approximately on
+S^(d-1), the unit sphere in d dimensions. The transformer update
+becomes a discrete-time dynamical system on that sphere:
+
+```
+x --> LayerNorm(x + attention_update + mlp_update)
+       ^                                        ^
+       on the sphere                  back on the sphere
+```
+
+In this picture, **attention heads are inter-oscillator couplings** ---
+they transport information between token states on the sphere, exactly
+like coupling terms in the Kuramoto model of synchronizing oscillators.
+**MLP layers are intra-oscillator modes** --- they transform a single
+token's state without coupling it to others.
+
+This is not metaphor. It is geometry. And geometry has consequences.
+
+## The Law
+
+In coupled-oscillator physics, there is a critical coupling below which
+an oscillator bond is dead --- it contributes nothing to coherent
+information flow. The Coherence Learning Rule (CLR) on a lattice gives
+this critical point as cos(Delta theta) = 0.679 on the circle S^1.
+
+To transfer this to a transformer with hidden dimension d, two steps:
+
+1. **Normalize** by the natural fluctuation scale on S^1 (which is
+   1/sqrt(2)), giving a dimensionless critical ratio chi_c = 0.96.
+2. **Rescale** by concentration of measure on S^(d-1): random unit
+   vectors in d dimensions have dot products of order 1/sqrt(d).
+
+The result is a universal dead-head threshold:
 
 ```
 tau_death(d) = 0.96 / sqrt(d_model)
 ```
 
-are dead: individually safe to ablate, as confirmed by per-head ablation
-ground truth. The threshold is derived from physics, not fitted. It transfers
-from d=768 through d=4096 without recalibration.
+No parameter is fitted. No model-specific calibration is needed. You
+plug in the hidden dimension and get the threshold.
+
+## The Evidence
+
+We measure each head's mean cosine alignment between its incoming
+write-back signal and the receiver's pre-head residual state. Heads
+below the threshold are classified as dead. We validate against
+individual head ablation ground truth:
 
 | Model | Family | d | Dead Heads | Total | Dead Precision |
 |---|---|---|---|---|---|
@@ -25,61 +68,107 @@ from d=768 through d=4096 without recalibration.
 | OpenLLaMA 7B | Llama | 4096 | 286 | 1024 | 100.0% |
 | Gemma 3 4B | Gemma | 2560 | 30 | 272 | 100.0% |
 
-## Derivation in Three Lines
+The same constant, the same formula, 95--100% precision across six
+models in four architecture families, from 768 to 4096 dimensions.
 
-1. CLR bond death on S^1: `cos(Delta theta) = 0.679`
-2. Normalize by S^1 fluctuation scale `1/sqrt(2)`: `chi_c = 0.96025`
-3. Transfer to S^(d-1) by concentration of measure: `tau = chi_c / sqrt(d)`
-
-## Quick Start: Scan Any Model
+## Scan Any Model
 
 ```bash
+pip install torch transformers numpy datasets matplotlib
+
+# Terminal output with layer-by-layer anatomy map
 python scripts/coherence_anatomy_scan.py --model gpt2
-python scripts/coherence_anatomy_scan.py --model meta-llama/Llama-3.2-1B
-python scripts/coherence_anatomy_scan.py --model Qwen/Qwen2.5-0.5B
+
+# Full HTML report with visualizations
+python scripts/coherence_anatomy_scan.py --model gpt2 --report gpt2_anatomy.html
+
+# JSON export for programmatic use
+python scripts/coherence_anatomy_scan.py --model meta-llama/Llama-3.2-1B --output llama.json
+
+# GPU acceleration
+python scripts/coherence_anatomy_scan.py --model Qwen/Qwen2.5-0.5B --device cuda
 ```
 
-The scan script outputs per-head coupling values, dead/alive classification,
-and a visual layer-by-layer anatomy map. See `scripts/coherence_anatomy_scan.py --help`
-for all options.
+The scanner outputs:
+- Per-head coupling values and dead/alive classification
+- Visual layer-by-layer anatomy map
+- Batch consistency check (heads must be consistently dead, not just on average)
+- Self-contained HTML report with 5 embedded visualizations
 
-## Package Contents
+## Important: Identification, Not Pruning
 
-- `paper.tex` / `paper.pdf`: manuscript
-- `data/`: frozen JSON artifacts (six model validations)
-- `figures/`: publication figures
-- `scripts/`: reproduction scripts and standalone anatomy scanner
-- `references.bib`: bibliography
-- `AGENTS.md`: agent briefing for this folder
+This paper establishes an **identification law** --- a physics-derived
+boundary that tells you which heads are dead. It does NOT claim that
+naively deleting all dead heads produces a working model. In fact,
+simultaneous removal is catastrophic (the paper documents this).
 
-## Build
+Why? A head can be individually inert yet still participate in
+distributed basis rotations across layers. Removing many such heads at
+once perturbs the residual-stream geometry cumulatively. Coherence-aware
+removal --- using SVD spectral filtering, rotation compensation, and
+mean-compensated pruning --- is a separate engineering problem addressed
+in follow-on work.
 
-```bash
-make            # compile paper.pdf
-make figures    # regenerate figures from bundled JSON
+## Convergent Evidence
+
+Three independent research groups have recently arrived at observations
+consistent with the geometric picture developed here:
+
+- **SpectralQuant** (Gopinath, 2026): Key projection matrices have
+  effective dimensionality d_eff ~ 4 out of 128, meaning ~97% of
+  spectral energy is noise --- consistent with most attention operating
+  near the random-alignment scale of S^(d-1).
+
+- **TriAttention** (Mao et al., 2026): Q/K vectors concentrate around
+  fixed directions in pre-RoPE space --- a signature of partial
+  phase-locking in the oscillator picture.
+
+- **Tensor-role asymmetry** (Turney, 2026): Attention tensors tolerate
+  aggressive quantization while FFN write-back projections are
+  quality-critical --- exactly the inter-oscillator vs. intra-oscillator
+  distinction predicted by the coupled-oscillator geometry.
+
+## Repository Contents
+
+```
+paper.tex / paper.pdf    Manuscript (source and compiled)
+references.bib           Bibliography
+data/                    Frozen JSON result artifacts (6 models)
+figures/                 Publication figures
+scripts/
+  coherence_anatomy_scan.py         Standalone scanner (start here)
+  98_coherence_pruning_harness.py   Full experiment harness
+  98_result_plots.py                Regenerate summary figure
+  98_threshold_evidence_plots.py    Head-level threshold evidence
+  98_verify_threshold_bundle.py     Verify transfer rows
+  98_gqa_level2_plot.py             GQA compaction figure
+supporting/              Additional validation data
 ```
 
-## Reproduction
-
-### From Bundled Artifacts (no GPU needed)
+## Reproduce
 
 ```bash
+# Regenerate all figures from bundled artifacts (no GPU needed)
 python3 scripts/98_result_plots.py
-python3 scripts/98_gqa_level2_plot.py
 python3 scripts/98_threshold_evidence_plots.py
+python3 scripts/98_gqa_level2_plot.py
 python3 scripts/98_verify_threshold_bundle.py
+
+# Compile the paper
+make
 ```
 
-### Full Model Reruns
+## Citation
 
-Requires `torch`, `transformers`, `numpy`, `matplotlib`. See script headers
-for corpus path arguments. The scripts default to loading calibration data
-from TinyStories via Hugging Face.
+```bibtex
+@article{Sharpe2026,
+  author = {Michael Sharpe},
+  title  = {Coherence-Guided Dead-Head Identification in Frozen Transformers:
+            A Zero-Parameter Geometric Threshold from Coupled-Oscillator Criticality},
+  year   = {2026}
+}
+```
 
-## Scope
+## License
 
-This paper establishes an **identification law**: a physics-derived boundary
-that separates dead heads from coherently participating ones. Naive
-simultaneous removal of all dead heads is catastrophic (the paper documents
-this). Coherence-aware removal procedures are the subject of follow-on work
-and a companion open-source pipeline.
+Apache 2.0. See [LICENSE](LICENSE).
