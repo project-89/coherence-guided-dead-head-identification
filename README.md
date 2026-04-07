@@ -3,6 +3,16 @@
 **A zero-parameter dead-head threshold derived from coupled-oscillator
 criticality, validated across six model families at 95--100% precision.**
 
+## The Formula
+
+An attention head is dead if its mean coupling to the residual stream falls below:
+
+```
+tau_death(d) = 0.96 / sqrt(d_model)
+```
+
+This threshold is derived from coupled-oscillator criticality and concentration of measure on high-dimensional spheres. No parameter is fitted. It transfers across every architecture we have tested.
+
 ## The Key Insight: Transformers Are Coupled Oscillator Networks
 
 Every pruning method in the literature fits its threshold from data.
