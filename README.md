@@ -182,6 +182,12 @@ make
 }
 ```
 
-## License
+## License and Patent
 
-Apache 2.0. See [LICENSE](LICENSE).
+This work is released under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+Free for research, education, and noncommercial use. Contact us for commercial
+licensing.
+
+**Patent Pending:** U.S. Provisional Application No. 64/031,983, "Universal
+Identification of Redundant Neural Network Components Using Phase Transition
+Geometry on the Unit Hypersphere." Filed April 7, 2026.
