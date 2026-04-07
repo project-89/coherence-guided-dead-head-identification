@@ -35,7 +35,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 # ---------------------------------------------------------------------------
 # Derived threshold constant
 # ---------------------------------------------------------------------------
-# CLR bond death on S^1:   cos(Delta theta)_death = 0.679
+# BKT bond death on S^1:   cos(Delta theta)_death = 0.679
 # Normalize by sigma_1:    chi_c = 0.679 / (1/sqrt(2)) = 0.96025
 # Transfer to S^(d-1):     tau_death(d) = chi_c / sqrt(d)
 CHI_C = 0.679 * (2 ** 0.5)  # 0.96025...
@@ -587,7 +587,7 @@ AND consistent across batches to be classified as dead.</p>
 <div class="derivation">
 <h3>Derivation</h3>
 <ol>
-<li>CLR bond death on S<sup>1</sup>: cos(Delta theta)<sub>death</sub> = 0.679</li>
+<li>BKT bond death on S<sup>1</sup>: cos(Delta theta)<sub>death</sub> = 0.679</li>
 <li>Normalize by S<sup>1</sup> fluctuation scale sigma<sub>1</sub> = 1/sqrt(2):
     chi_c = 0.679 / (1/sqrt(2)) = {CHI_C:.5f}</li>
 <li>Transfer to S<sup>d-1</sup> by concentration of measure:

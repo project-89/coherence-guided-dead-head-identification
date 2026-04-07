@@ -35,7 +35,8 @@ from coupled-oscillator criticality. The operational observable is the mean cosi
 alignment between a head's incoming attention-weighted value write-back and the
 receiver's pre-head residual stream. LayerNorm places token states approximately
 on $S^{d-1}$; attention heads act as state-dependent inter-oscillator couplings.
-Starting from the lattice Coherence Learning Rule (CLR) bond-death threshold
+Starting from the coupled-oscillator bond-death threshold at
+Berezinskii-Kosterlitz-Thouless (BKT) criticality,
 $\cos(\Delta \theta) = 0.679$ on $S^1$, normalizing by the natural fluctuation
 scale on the circle, and rescaling by concentration of measure on $S^{d-1}$ yields
 \begin{equation}
@@ -178,20 +179,26 @@ Domain wall / bridge bond & boundary or bridge-critical head \\
 
 \subsection{Lattice Death Threshold}
 
-The underlying physical starting point is the Coherence Learning Rule (CLR) on
-coupled oscillators. For a lattice bond $(ij)$ with coupling $K_{ij}$ and phase
-difference $\Delta \theta_{ij}$, the CLR update has the form
+The underlying physical starting point is the
+Berezinskii-Kosterlitz-Thouless (BKT) transition on a lattice of coupled
+oscillators~\cite{Kosterlitz1973,Kuramoto1984}. Consider a lattice bond $(ij)$
+with coupling strength $K_{ij}$ and phase difference $\Delta \theta_{ij}$.
+Whether a bond grows or decays depends on the balance between the local phase
+alignment $\cos(\Delta \theta_{ij})$ and the thermal noise scale set by the
+lattice coordination number. In the standard XY model framework, the coupling
+dynamics take the form
 \begin{equation}
 \dot{K}_{ij} = \eta \left[\Rzero(K_{ij}) \cos(\Delta \theta_{ij}) - \frac{2K_{ij}}{r}\right],
 \end{equation}
-where $\Rzero(K)=I_1(K)/I_0(K)$ is the modified Bessel ratio. At the alive/dead
-boundary, the update changes sign. Evaluated at the critical radius of the lattice
-analysis, this gives the scalar death condition
+where $\Rzero(K)=I_1(K)/I_0(K)$ is the modified Bessel ratio (the order
+parameter of a single bond) and $r$ is a lattice-dependent scale factor. At the
+alive/dead boundary, the growth rate changes sign. Evaluated at the BKT critical
+point for a coordination-$4$ lattice, this gives the scalar death condition
 \begin{equation}
 \cos(\Delta \theta)_{\mathrm{death}} = \frac{4}{r} = 0.679.
 \end{equation}
-This threshold lives on $S^1$ and is tied to the same critical coherence logic used
-in the lattice-side program.
+This threshold lives on $S^1$: it is the critical alignment below which a bond
+between two oscillators cannot sustain coherent coupling.
 
 \subsection{Dimensional Transfer by Concentration of Measure}
 
@@ -238,7 +245,7 @@ transformer threshold is
 
 \begin{proposition}
 If transformer head coupling is measured as a directional alignment on $S^{d-1}$,
-then the leading-order transfer of the CLR death boundary from scalar phase space
+then the leading-order transfer of the BKT death boundary from scalar phase space
 to hidden-state geometry is $\taudeath(d)=\chic/\sqrt{d}$ with $\chic \approx 0.96$.
 \end{proposition}
 
@@ -516,7 +523,7 @@ The central result of this paper is that a threshold derived from
 coupled-oscillator criticality and high-dimensional geometry identifies dead
 attention heads at $95$--$100\%$ precision across six architecturally distinct
 frozen decoders. The threshold is not fitted, searched, or calibrated per model.
-It is derived once from the CLR bond-death condition and concentration of measure,
+It is derived once from the BKT bond-death condition and concentration of measure,
 then applied to any frozen transformer given only its hidden dimension.
 
 This is qualitatively different from existing pruning heuristics. Magnitude-based
@@ -527,7 +534,7 @@ LLM-Pruner~\cite{LLMPruner2023} and FLAP~\cite{FLAP2023} all require
 model-specific calibration to determine their operating thresholds. The present
 result replaces that calibration with a geometric law.
 
-Separate CLR pipeline runs also surface sizeable dead-head fractions at larger
+Separate pipeline runs using the same threshold also surface sizeable dead-head fractions at larger
 scale, e.g.\ $407$ dead heads ($26.5\%$) on REAP-25B MoE and $180$ dead heads
 ($54\%$) on Gemma 4 E4B, directionally consistent with the same identification
 law. These are not included in the main claim because this bundle does not
@@ -572,8 +579,9 @@ different dynamics.
 
 These three independent lines of evidence---spectral concentration in keys,
 directional concentration in query/key space, and tensor-role sensitivity in
-compression---were developed without reference to each other or to the CLR
-framework, yet each converges on the same geometric picture articulated in
+compression---were developed without reference to each other or to the
+coupled-oscillator framework, yet each converges on the same geometric picture
+articulated in
 Section~\ref{sec:mlp-modes}.
 
 \subsection{Follow-On Directions}
@@ -585,8 +593,8 @@ SVD spectral filtering, rotation-compensated excision, and mean-compensated
 pruning operators that respect the residual-stream geometry,
 \item \textbf{Generalized BKT theory on $S^{d-1}$}: closing the full
 critical-point theory for the vector Kuramoto / Lohe system,
-\item \textbf{CLR-during-training}: removing dead heads online during training
-rather than post hoc.
+\item \textbf{Coherence-during-training}: removing dead heads online during
+training rather than post hoc.
 \end{enumerate}
 A companion open-source pipeline implementing the full coherence-guided
 compression stack---head identification, channel pruning, and role-aware weight

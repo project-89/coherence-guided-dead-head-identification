@@ -14,10 +14,10 @@ The threshold:
 tau_death(d) = chi_c / sqrt(d_model),    chi_c = 0.96
 ```
 
-is derived from lattice coupled-oscillator criticality (CLR bond death at
-cos = 0.679, normalized by the S^1 fluctuation scale, transferred to S^(d-1)
-by concentration of measure). No parameter is fitted. No model-specific
-calibration is needed.
+is derived from the Berezinskii-Kosterlitz-Thouless (BKT) phase transition
+on coupled oscillators (bond death at cos = 0.679, normalized by the S^1
+fluctuation scale, transferred to S^(d-1) by concentration of measure).
+No parameter is fitted. No model-specific calibration is needed.
 
 ## Why It Matters
 
@@ -58,7 +58,7 @@ def dead_head_scan(model, calibration_tokens, chi_c=0.96):
 
 ## Derivation (for reference)
 
-1. CLR bond death threshold on S^1: `cos(Delta theta)_death = 0.679`
+1. BKT bond death threshold on S^1: `cos(Delta theta)_death = 0.679`
 2. Normalize by S^1 fluctuation scale `sigma_1 = 1/sqrt(2)`:
    `chi_c = 0.679 / (1/sqrt(2)) = 0.96025`
 3. Transfer to S^(d-1) via concentration of measure (`sigma_d = 1/sqrt(d)`):
@@ -77,7 +77,7 @@ def dead_head_scan(model, calibration_tokens, chi_c=0.96):
 - That simultaneously removing all dead heads is lossless (it is catastrophic)
 - Theorem closure that transformers are exactly vector Kuramoto systems
 - The full generalized BKT critical theory on S^(d-1)
-- CLR-during-training as already validated
+- Coherence-during-training as already validated
 - That naive deletion is the correct downstream operator
 
 The identification law is this paper. Removal is a separate engineering
