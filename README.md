@@ -11,7 +11,7 @@ An attention head is dead if its mean coupling to the residual stream falls belo
 tau_death(d) = 0.96 / sqrt(d_model)
 ```
 
-This threshold is derived from coupled-oscillator criticality and concentration of measure on high-dimensional spheres. No parameter is fitted. It transfers across every architecture we have tested.
+This threshold is derived from the Berezinskii-Kosterlitz-Thouless (BKT) phase transition on coupled oscillators and concentration of measure on high-dimensional spheres. No parameter is fitted. It transfers across every architecture we have tested.
 
 ## The Key Insight: Transformers Are Coupled Oscillator Networks
 
@@ -41,10 +41,13 @@ This is not metaphor. It is geometry. And geometry has consequences.
 
 ## The Law
 
-In coupled-oscillator physics, there is a critical coupling below which
-an oscillator bond is dead --- it contributes nothing to coherent
-information flow. The Coherence Learning Rule (CLR) on a lattice gives
-this critical point as cos(Delta theta) = 0.679 on the circle S^1.
+In coupled-oscillator physics, there is a critical coupling strength
+below which a bond between oscillators is dead --- it cannot sustain
+coherent information flow. This is the
+[Berezinskii-Kosterlitz-Thouless (BKT)](https://en.wikipedia.org/wiki/Berezinskii%E2%80%93Kosterlitz%E2%80%93Thouless_transition)
+transition, one of the most well-studied phase transitions in
+statistical physics. On a lattice of coupled oscillators, the critical
+alignment threshold is cos(Delta theta) = 0.679 on the circle S^1.
 
 To transfer this to a transformer with hidden dimension d, two steps:
 
