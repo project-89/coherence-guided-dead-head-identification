@@ -460,6 +460,38 @@ clustered at $\chic \in [0.96000, 0.96025]$. Right: model-wise breakdown of belo
 protected, and still-alive outcomes.}
 \end{figure}
 
+\subsection{Scaling Collapse}
+
+The derivation predicts that $\sqrt{d_{\mathrm{model}}}$ is the correct
+normalization for the coupling observable, because LayerNorm places token states
+on $S^{d_{\mathrm{model}}-1}$ and the concentration-of-measure fluctuation scale
+on that sphere is $1/\sqrt{d_{\mathrm{model}}}$. An alternative hypothesis is
+that $\sqrt{d_{\mathrm{head}}}$ is the relevant scale, since heads operate in
+$d_{\mathrm{head}}$-dimensional subspaces.
+
+Figure~\ref{fig:scaling-collapse} tests this directly. Under
+$\sqrt{d_{\mathrm{model}}}$ normalization, the derived threshold collapses to a
+single line at $\chic = 0.96$ across all five models spanning $d=768$ through
+$d=4096$. Under $\sqrt{d_{\mathrm{head}}}$ normalization, the equivalent
+thresholds scatter to different positions because the ratio
+$d_{\mathrm{model}}/d_{\mathrm{head}}$ varies across architectures. This confirms
+that the full hidden dimension, not the per-head subspace dimension, is the
+geometrically relevant scale---consistent with the write-back signal being
+projected into the $d_{\mathrm{model}}$-dimensional residual stream where
+LayerNorm enforces the sphere constraint.
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{figures/exp98_scaling_collapse.png}
+\caption{\label{fig:scaling-collapse}
+Scaling collapse test. Left: raw coupling requires a different threshold per
+model. Center: under $\sqrt{d_{\mathrm{model}}}$ normalization, all five models'
+coupling distributions overlay and the threshold collapses to a single value
+$\chic = 0.96$. Right: under $\sqrt{d_{\mathrm{head}}}$ normalization, the
+equivalent thresholds scatter across different positions. The
+$\sqrt{d_{\mathrm{model}}}$ normalization is the one predicted by concentration
+of measure on $S^{d_{\mathrm{model}}-1}$.}
+\end{figure}
+
 \subsection{Base-Rate Analysis}
 
 A natural question is whether the derived threshold provides meaningful
