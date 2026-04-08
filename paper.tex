@@ -492,6 +492,45 @@ $\sqrt{d_{\mathrm{model}}}$ normalization is the one predicted by concentration
 of measure on $S^{d_{\mathrm{model}}-1}$.}
 \end{figure}
 
+\subsection{Random-Initialization Control}
+
+A natural concern is whether the coupling structure measured by $z_h$ reflects
+learned dynamics or merely architecture geometry. To test this, we loaded four
+of the five models from random initialization (\texttt{from\_config}, no trained
+weights) and measured $\mathrm{std}(z_h)$ under the same protocol.
+
+\begin{table}[t]
+\caption{\label{tab:randinit} Random-initialization control. The coupling
+structure is overwhelmingly learned: trained models show $9$--$18\times$ wider
+normalized coupling distributions than their randomly initialized counterparts.
+Random-init values are below the geometric null prediction of $\mathrm{std}(z_h)
+\approx 1$ because the output projection $W_O$ is initialized small, producing
+near-zero write-back signals.}
+\begin{tabular}{lccc}
+\toprule
+Model & $\mathrm{std}(z_h)$ trained & $\mathrm{std}(z_h)$ random & Ratio \\
+\midrule
+GPT-2 & 4.17 & 0.47 & 8.9$\times$ \\
+GPT-2 Medium & 5.92 & 0.55 & 10.7$\times$ \\
+Qwen2.5 0.5B & 2.71 & 0.20 & 13.6$\times$ \\
+SmolLM2 360M & 3.84 & 0.22 & 17.5$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result (Table~\ref{tab:randinit}) is unambiguous: random-init models give
+$\mathrm{std}(z_h) \approx 0.2$--$0.55$, well below the geometric null of $1.0$
+and $9$--$18\times$ smaller than trained models. Training pushes some heads into
+strong coherent coupling ($z_h \gg 1$) while leaving others near the noise floor.
+The threshold at $\chic \approx 0.96$ partitions this learned structure, not
+architecture geometry.
+
+This also addresses why $\mathrm{std}(z_h)$ varies across trained models ($2.7$
+to $5.9$): different architectures, trained on different data with different
+optimizers, allocate different amounts of capacity above and below the critical
+coupling. The threshold is a critical value, not a distributional shape
+parameter---the same way a boiling point does not depend on the volume of liquid.
+
 \subsection{Base-Rate Analysis}
 
 A natural question is whether the derived threshold provides meaningful
